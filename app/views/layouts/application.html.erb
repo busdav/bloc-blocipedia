@@ -8,15 +8,25 @@
 </head>
 <body>
   
-  <%= render 'layouts/header' %>
+  <div class="container">
+    <%= render 'layouts/header' %>
+
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:error] %>
+        <div class="alert alert-danger">
+          <%= flash[:error] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert alert-danger">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
+      <%= yield %>
+  </div>
   
-  <% if flash[:notice] %>
-    <%=  flash[:notice] %>
-  <% elseif flash[:error] %>
-    <%=  flash[:error] %>
-  <% end %>
-
-<%= yield %>
-
 </body>
 </html>

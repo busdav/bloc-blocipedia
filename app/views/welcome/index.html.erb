@@ -1,16 +1,14 @@
-<div class="container">
-  <div class="hero-unit">
-    <h1>Welcome to Blocipedia</h1>
-    <p>Content created by YOU.</p>
-  </div>
-  <div class='span5'>
-    <h1>Free Account</h1>
-    <p>With a free account, you can create as many wikis as you'd like and add collaborators to help you!</p>
-    <a class="btn" href="#">Sign up for a Free Account!</a>
-  </div>
-  <div class='span5'>
-    <h1>Premium Account</h1>
-    <p>With a premium account, you can create private wikis!</p><br>
-    <a class="btn" href="#">Sign up for a Premium Account!</a>
-  </div>  
+<div class="hero-unit">
+  <h1>Welcome to Blocipedia</h1>
+  <p>Content created by YOU.</p>
+</div>
+<div class='span5'>
+  <h1>Free Account</h1>
+  <p>With a free account, you can create as many wikis as you'd like and add collaborators to help you!</p>
+  <%= link_to "Sign up for a Free Account!", new_user_registration_path, class: "btn" %>
+</div>
+<div class='span5'>
+  <h1>Premium Account</h1>
+  <p>With a premium account, you can create private wikis!</p><br>
+  <a class="btn" href="#">Sign up for a Premium Account!</a>
 </div>
