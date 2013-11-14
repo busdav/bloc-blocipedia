@@ -9,8 +9,6 @@
       <%= f.text_field :name %>
     </div>
   </div>
-
-
   <div class="control-group">
     <%= f.label :email %>
     <div class="controls">
@@ -25,7 +23,7 @@
   <div class="control-group">
     <%= f.label :password %> <i> leave blank if you don't want to chnage it </i>
     <div class="controls">
-      <%= f.text_field :password %>
+      <%= f.password_field :password %>
     </div>
   </div>
 
@@ -33,14 +31,14 @@
   <div class="control-group">
     <%= f.label :password_confirmation %>
     <div class="controls">
-      <%= f.email_field :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :current_password %> <i> we need your current password to confirm your changes
     <div class="controls">
-      <%= f.email_field :current_password %>
+      <%= f.password_field :current_password %>
     </div>
   </div>
 
