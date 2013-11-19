@@ -17,17 +17,23 @@ rand(5..10).times do
   end
 end
 
-  u = User.first
-  u.skip_confirmation!
-  u.update_attributes(email: 'example@example.com', password: 'helloworld', password_confirmation: 'helloworld')
-
-  U = User.new(
+  u = User.new(
     name: 'Robert Ing',
-    email: 'rmi22186@gmail.com',
+    email: 'free@example.com',
     password: 'helloworld',
     password_confirmation: 'helloworld')
   u.skip_confirmation!
   u.save
+  u.update_attributes(role: 'free')
+
+  u = User.new(
+    name: 'Robert Ing',
+    email: 'premium@example.com',
+    password: 'helloworld',
+    password_confirmation: 'helloworld')
+  u.skip_confirmation!  
+  u.save
+  u.update_attributes(role: 'premium')
 
 
 puts "seed finished"
