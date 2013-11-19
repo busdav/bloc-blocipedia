@@ -9,13 +9,11 @@
         <li><%= link_to "Wikis", wikis_path %></li>
       </ul>
       <ul class="pull-right nav">
-      
-
-
+    
       <% if current_user %>
-      <% if current_user.role == "free" %>
-        <li><%= link_to "Upgrade" %></li>
-      <% end %>
+        <% if current_user.role == "free" %>
+          <li><%= link_to "Upgrade" %></li>
+        <% end %>    
         <li><%= link_to "My Profile", edit_user_registration_path %></li>
         <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
       <% else %>

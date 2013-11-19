@@ -12,7 +12,7 @@ rand(5..10).times do
 
   rand(10..30).times do 
   w = u.wikis.create(
-    title: Faker::Lorem.words(rand(1..10)).join(" "), 
+    title: Faker::Lorem.words(1), 
     body: Faker::Lorem.paragraphs(rand(1..3)).join("\n"))
   end
 end

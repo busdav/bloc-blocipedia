@@ -20,11 +20,13 @@ class WikisController < ApplicationController
 
   def create
     @wiki = Wiki.new(params[:wiki])
+    @wiki.user = current_user
     authorize! :create, @wiki, message: "Error message for create"
     if @wiki.save
       flash[:notice] = "Wiki Saved Successfully!"
       redirect_to @wiki
     else
+      Rails.logger.info @wiki.errors.full_messages
       flash[:error] = "wiki not saved :("
       render :new
     end
