@@ -2,14 +2,13 @@
   <h1> Wiki Index </h1>
   <p>Show all wikis</p>
   <% @wiki.each do |wiki| %>
-    <h2><%= link_to wiki.title, wiki %></h2>
-    <small><%= wiki.body %></small>
+    <h2><%= markdown link_to wiki.title, wiki %></h2>
+    <small><%= markdown wiki.body %></small>
 <% end %>
 </div>
 
 <div class="span5">
   <h1>Want to make a new wiki?</h1>
   <%= link_to "Make New Wiki!", new_wiki_path, class:'btn btn-large' %>
-
 
 </div>

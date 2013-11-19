@@ -1,7 +1,7 @@
-<h1><%= @wiki.title %></h1>
+<h1><%= markdown @wiki.title %></h1>
   <small>
     <p><i>Updated about <%= time_ago_in_words(@wiki.updated_at) %> ago</i></p>
   </small>
-<%= @wiki.body %>
+<%= markdown @wiki.body %>
 
 <%= link_to "Edit Wiki", edit_wiki_path(@wiki) %>
