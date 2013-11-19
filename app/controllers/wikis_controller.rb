@@ -26,6 +26,7 @@ class WikisController < ApplicationController
       redirect_to @wiki
     else
       flash[:error] = "wiki not saved :("
+      render :new
     end
   end
 
@@ -37,7 +38,7 @@ class WikisController < ApplicationController
       redirect_to @wiki
     else 
       flash[:error] = "error updating!"
-      redirect_to :edit
+      render :edit
     end
   end
 
