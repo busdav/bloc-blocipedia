@@ -21,6 +21,15 @@ end
   u.skip_confirmation!
   u.update_attributes(email: 'example@example.com', password: 'helloworld', password_confirmation: 'helloworld')
 
+  U = User.new(
+    name: 'Robert Ing',
+    email: 'rmi22186@gmail.com',
+    password: 'helloworld',
+    password_confirmation: 'helloworld')
+  u.skip_confirmation!
+  u.save
+
+
 puts "seed finished"
 puts "#{Wiki.count} wikis created"
 puts "#{User.count} users created"

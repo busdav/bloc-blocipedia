@@ -10,5 +10,16 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
   has_many :wikis
-  
+
+  before_create :set_member
+
+  ROLES = %w[free premium]
+    def role?(base_role)
+      role.nil? ? false : ROLES.index(base_role.to_s) <= ROLES.index(role)  
+  end
+
+  def set_member
+    self.role = 'free'
+  end
+
 end
