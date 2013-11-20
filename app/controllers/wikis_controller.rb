@@ -1,52 +1,51 @@
 class WikisController < ApplicationController
   def index
-    @wiki = Wiki.all
+    @wikis = current_user.nil? ? Wiki.public : Wiki.visible_to(current_user)
   end
 
   def new
     @wiki = Wiki.new
-    authorize! :create, @wiki, message: "Error message for create"
+    authorize! :create, @wiki, message: "You must be logged in to create a new Wiki"
   end
 
   def show
     @wiki = Wiki.find(params[:id])
-    authorize! :read, @wiki, message: "Error message for show"
+    authorize! :read, @wiki, message: "You must be authorised in to view Wikis"
   end
 
   def edit
     @wiki = Wiki.find(params[:id])
-    authorize! :update, @wiki, message: "Error message for update"
+    authorize! :update, @wiki, message: "You must be logged in to edit Wikis"
   end
 
   def create
-    @wiki = Wiki.new(params[:wiki])
-    @wiki.user = current_user
-    authorize! :create, @wiki, message: "Error message for create"
+    @wiki = current_user.wikis.build(params[:wiki])
+    authorize! :create, @wiki, message: "   "
     if @wiki.save
       flash[:notice] = "Wiki Saved Successfully!"
       redirect_to @wiki
     else
       Rails.logger.info @wiki.errors.full_messages
-      flash[:error] = "wiki not saved :("
+      flash[:error] = "Error saving wiki :("
       render :new
     end
   end
 
   def update
     @wiki = Wiki.find(params[:id])
-    authorize! :update, @wiki, message: "Error message for update"
+    authorize! :update, @wiki, message: "You must be logged in to edit Wikis"
     if @wiki.update_attributes(params[:wiki])
-      flash[:notice] = "updated!"
+      flash[:notice] = "updated successfully!"
       redirect_to @wiki
     else 
-      flash[:error] = "error updating!"
+      flash[:error] = "You must be logged in to update!"
       render :edit
     end
   end
 
   def destroy
     @wiki = Wiki.find(params[:id])
-    authorize! :destroy, @wiki, message: "Error message for delete"
+    authorize! :destroy, @wiki, message: "You must be logged in to delete this"
     if @wiki.destroy
       flash[:notice] = "destroyed successfully"
       redirect_to wiki_path

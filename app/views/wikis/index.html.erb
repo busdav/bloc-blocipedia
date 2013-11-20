@@ -1,10 +1,10 @@
 <div class="span5">
   <h1> Wiki Index </h1>
   <p>Show all wikis</p>
-  <% @wiki.each do |wiki| %>
+  <% @wikis.each do |wiki| %>
     <h2><%= markdown link_to wiki.title, wiki %></h2>
-    <small><%= markdown wiki.body %></small>
-<% end %>
+    <small><%= markdown wiki.body %></small>  
+  <% end %>
 </div>
 
 <div class="span5">
