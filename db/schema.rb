@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131119170312) do
+ActiveRecord::Schema.define(:version => 20131121014959) do
+
+  create_table "collaborators", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "wiki_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "admin"
+  end
+
+  add_index "collaborators", ["admin"], :name => "index_collaborators_on_admin"
+  add_index "collaborators", ["user_id"], :name => "index_collaborators_on_user_id"
+  add_index "collaborators", ["wiki_id"], :name => "index_collaborators_on_wiki_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

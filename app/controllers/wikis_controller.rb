@@ -19,8 +19,10 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = current_user.wikis.build(params[:wiki])
-    authorize! :create, @wiki, message: "   "
+    @wiki = Wiki.new(params[:wiki])
+    @wiki.user = current_user
+    @wiki.save && @wiki.collaborators.create(:user_id => current_user.id, :admin => true)
+    authorize! :create, @wiki
     if @wiki.save
       flash[:notice] = "Wiki Saved Successfully!"
       redirect_to @wiki

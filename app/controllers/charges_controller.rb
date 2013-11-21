@@ -21,7 +21,7 @@ class ChargesController < ApplicationController
 
     if charge
       current_user.update_attribute(:role, "premium")
-      flash[:success] = "You now have an upgraded account!"
+      flash[:notice] = "You now have an upgraded account!"
       redirect_to wikis_path
     end
 

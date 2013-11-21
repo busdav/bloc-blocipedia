@@ -12,4 +12,7 @@ class Wiki < ActiveRecord::Base
   scope :public, where(public: true) #make Wiki.public possible
 
   default_scope order('created_at DESC')
+
+  has_many :collaborators
+  has_many :users, :through => :collaborators
 end
