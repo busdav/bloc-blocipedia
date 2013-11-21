@@ -1,5 +1,9 @@
 Blocipedia::Application.routes.draw do
-  resources :wikis
+  
+  resources :wikis do 
+    resources :collaborators
+  end
+  
   resources :charges
   
   devise_for :users

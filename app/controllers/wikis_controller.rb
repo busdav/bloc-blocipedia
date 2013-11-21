@@ -10,18 +10,17 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
-    authorize! :read, @wiki, message: "You must be authorised in to view Wikis"
+    authorize! :read, @wiki, message: "You must be authorized in to view Wikis"
   end
 
   def edit
     @wiki = Wiki.find(params[:id])
-    authorize! :update, @wiki, message: "You must be logged in to edit Wikis"
+    authorize! :update, @wiki, message: "You must be authorized in to edit Wikis"
   end
 
   def create
     @wiki = Wiki.new(params[:wiki])
     @wiki.user = current_user
-    @wiki.save && @wiki.collaborators.create(:user_id => current_user.id, :admin => true)
     authorize! :create, @wiki
     if @wiki.save
       flash[:notice] = "Wiki Saved Successfully!"
@@ -35,7 +34,7 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.find(params[:id])
-    authorize! :update, @wiki, message: "You must be logged in to edit Wikis"
+    authorize! :update, @wiki, message: "You must be authorized to edit Wikis"
     if @wiki.update_attributes(params[:wiki])
       flash[:notice] = "updated successfully!"
       redirect_to @wiki
@@ -47,7 +46,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
-    authorize! :destroy, @wiki, message: "You must be logged in to delete this"
+    authorize! :destroy, @wiki, message: "You must be authorized to delete this"
     if @wiki.destroy
       flash[:notice] = "destroyed successfully"
       redirect_to wiki_path

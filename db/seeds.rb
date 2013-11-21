@@ -12,10 +12,12 @@ rand(5..10).times do
 
   rand(10..30).times do 
   w = u.wikis.create(
-    title: Faker::Lorem.words(rand(1..1)).join(" "),
-    body: Faker::Lorem.paragraphs(rand(1..3)).join("\n"))
+    title: Faker::Lorem.words(rand(1..1)).join(" "), 
+    body: Faker::Lorem.paragraphs(rand(1..4)).join("\n"))
   end
 end
+
+
 
   u = User.new(
     name: 'Robert Ing',
