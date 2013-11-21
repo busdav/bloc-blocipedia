@@ -4,7 +4,7 @@ class Ability
   def initialize(user)
     user ||= User.new # guest user (not logged in)
     if user.role? :free
-      can :read, Wiki, public: true
+      can :manage, Wiki, public: true
     end
 
     if user.role? :premium

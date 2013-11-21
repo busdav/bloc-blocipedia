@@ -22,4 +22,5 @@ class User < ActiveRecord::Base
     self.role = 'free'
   end
 
+
 end

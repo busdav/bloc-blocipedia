@@ -5,7 +5,7 @@ class WikisController < ApplicationController
 
   def new
     @wiki = Wiki.new
-    authorize! :create, @wiki, message: "You must be logged in to create a new Wiki"
+    authorize! :create, @wiki, message: "You must be authorized to make a new wiki"
   end
 
   def show
