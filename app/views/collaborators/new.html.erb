@@ -1,5 +1,5 @@
 <%= form_for [@wiki, @collaborator] do |f| %>
 <%= f.label :user_id, 'Add collaborator'  %>
-<%= f.collection_select(:user_id, User.all, :id, :name)  %>
+<%= f.collection_select(:user_id, User.all, :id, :name)  %> <!--#what is passed through, what to show, :number for option select, name) -->
 <%= f.submit 'Add collaborator' %>
 <% end %>
