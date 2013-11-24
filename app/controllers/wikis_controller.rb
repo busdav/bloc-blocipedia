@@ -55,4 +55,15 @@ class WikisController < ApplicationController
       render :show
     end
   end
+
+  def add_collaborators
+    @wiki = Wiki.find(params[:id])
+    params[:colloborator_id[]].each do |collaborator_id|
+      collaborator = User.find(collaborator_id)
+      @wiki.collaborators << collaborator
+    end
+    if @wiki.save
+    else
+    end
+  end
 end
