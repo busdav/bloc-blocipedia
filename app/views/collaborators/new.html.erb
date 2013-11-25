@@ -1,23 +1,7 @@
 <%= form_for @wiki, url: add_collaborators_wiki_path do |user| %>
-  <%= f.label :user_id, 'Add collaborator'  %>
+  <%= user.label :user_id, 'Add collaborator'  %>
   
   <%= check_box_tag ":collaborator_id[]", user.id, @wiki.collaborators.include?(user) %>
   <% end %>
 
   <%= f.submit 'Add collaborator' %>
-
-
-
-
-
-
-
-
-
-
-
-<!--<%= form_for [@wiki, @collaborator] do |f| %>
-<%= f.label :user_id, 'Add collaborator'  %>
-<%= f.collection_select(:user_id, User.all, :id, :name)  %> #what is passed through, what to show, :number for option select, name)
-<%= f.submit 'Add collaborator' %>
-<% end %> -->

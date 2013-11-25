@@ -1,9 +1,8 @@
 Blocipedia::Application.routes.draw do
   
   resources :wikis do 
-    post :save_collaborators, on: :member
     get :add_collaborators, on: :member
-    resources :collaborators
+    post :save_collaborators, on: :member
   end
   
   resources :charges
