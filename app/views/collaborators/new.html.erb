@@ -1,7 +1,7 @@
 <%= form_for @wiki, url: add_collaborators_wiki_path do |user| %>
   <%= f.label :user_id, 'Add collaborator'  %>
   
-  <%= check_box_tag "collaborator_id[]", user.id, @wiki.collaborators.include?(user) %>
+  <%= check_box_tag ":collaborator_id[]", user.id, @wiki.collaborators.include?(user) %>
   <% end %>
 
   <%= f.submit 'Add collaborator' %>

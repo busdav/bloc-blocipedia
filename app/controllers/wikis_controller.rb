@@ -51,19 +51,27 @@ class WikisController < ApplicationController
       flash[:notice] = "destroyed successfully"
       redirect_to wiki_path
     else
-      flash[:error] = "wrong"
+      flash[:error] = "unable to delete!"
       render :show
     end
   end
 
   def add_collaborators
     @wiki = Wiki.find(params[:id])
+  end
+
+    def save_collaborators
+    @wiki = Wiki.find(params[:id])
     params[:colloborator_id[]].each do |collaborator_id|
       collaborator = User.find(collaborator_id)
-      @wiki.collaborators << collaborator
+      @wiki.collaborators << collaborators
     end
     if @wiki.save
+      flash[:notice] = "successfully updated collaborators!"
+      redirect_to @wiki
     else
+      flash[:error] = "unable to update collaborators"
+      render :add_collaborators
     end
   end
 end
