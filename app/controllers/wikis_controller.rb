@@ -58,13 +58,14 @@ class WikisController < ApplicationController
 
   def add_collaborators
     @wiki = Wiki.find(params[:id])
+    @users = User.all
   end
 
     def save_collaborators
     @wiki = Wiki.find(params[:id])
     params[:colloborator_id[]].each do |collaborator_id|
       collaborator = User.find(collaborator_id)
-      @wiki.collaborators << collaborators
+      @wiki.collaborators << collaborator
     end
     if @wiki.save
       flash[:notice] = "successfully updated collaborators!"
