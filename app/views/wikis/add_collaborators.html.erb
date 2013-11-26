@@ -1,32 +1,27 @@
 <h1>Add Collaborators to your private wiki</h1>
-
-<div class="span5">
-  <table>
-  <thead>
-    <tr>
-      <th>User Name</th>
-      <th>Email</th>
-      <th>Add Collaborator?</th>
-    </tr>
-  </thead>
-
-   <tbody> 
-    <% @users.each do |u| %>
+<%= form_for @wiki, url: save_collaborators_wiki_path, method: :post do |user| %>
+  <div class="span5">
+    <table>
+    <thead>
       <tr>
-        <td><%= u.name %></td>
-        <td><%= u.email %></td>
-        <td>
-          <%= form_for @wiki, url: add_collaborators_wiki_path do |user| %>
-          <%= check_box_tag ":collaborator_id[]", :user_id, @wiki.collaborators.include?(user) %>
-          <% end %>
-        </td>
-      </tr> 
-  <% end %>
-  </table>
-</div>
-
-<div class="span5">
-  <%= form_for @wiki, url: add_collaborators_wiki_path do |user| %>
-  <%= user.submit 'Add collaborators' %>
-  <% end %>
-</div>
+        <th>User Name</th>
+        <th>Email</th>
+        <th>Add Collaborator?</th>
+      </tr>
+    </thead>
+     <tbody> 
+      <% @users.each do |u| %>
+        <tr>
+          <td><%= u.name %></td>
+          <td><%= u.email %></td>
+          <td>
+            <%= check_box_tag "collaborator_id[]", u.id, has_collaborator(@wiki, u) %>
+          </td>
+        </tr> 
+    <% end %>
+    </table>
+  </div>
+  <div class="span5">
+    <%= user.submit 'Save collaborators' %>
+  </div>
+<% end %>

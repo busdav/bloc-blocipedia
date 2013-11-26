@@ -1,20 +1,7 @@
 <h2>New Wiki!</h2>
 
 <%= form_for @wiki do |f| %>
-  <div class="control-group">
-    <%= f.label :title %>
-    <div class="controls">
-      <%= f.text_field :title, :autofocus => true, placeholder: 'Enter Title' %>
-    </div>
-  </div>
-
-  <div class="control-group">
-    <%= f.label :body %>
-    <div class="controls">
-      <%= f.text_area :body %>
-    </div>
-  </div>
-
+ <%= render 'form', :f => f %>
 <div class="control-group">
     <%= f.label :public %>
     <div class="controls">

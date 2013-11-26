@@ -9,9 +9,8 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
 
-  
-  has_many :collaborators
-  has_many :wikis, :through => :collaborators
+  has_many :wikis
+  has_many :collaborators, through: :wikis
 
   before_create :set_member
 
@@ -23,6 +22,7 @@ class User < ActiveRecord::Base
   def set_member
     self.role = 'free'
   end
+
 
 
 end

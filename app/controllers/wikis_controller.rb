@@ -61,13 +61,14 @@ class WikisController < ApplicationController
     @users = User.all
   end
 
-    def save_collaborators
+  def save_collaborators
     @wiki = Wiki.find(params[:id])
-    params[:colloborator_id[]].each do |collaborator_id|
-      collaborator = User.find(collaborator_id)
-      @wiki.collaborators << collaborator
+    success = false
+    params["collaborator_id"].each do |collaborator_id|
+      user = User.find(collaborator_id)
+      success = Collaborator.create(user: user, wiki: @wiki)
     end
-    if @wiki.save
+    if success
       flash[:notice] = "successfully updated collaborators!"
       redirect_to @wiki
     else
