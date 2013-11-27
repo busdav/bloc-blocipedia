@@ -13,7 +13,7 @@ helper_method :sort_column, :sort_direction
   private
   
   def sort_column
-    User.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    Wiki.column_names.include?(params[:sort]) ? params[:sort] : "title"
   end
 
   def sort_direction

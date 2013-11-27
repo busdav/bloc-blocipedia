@@ -1,8 +1,10 @@
-<table class = "table">
+<table class="table table-hover table-condensed">
   <theader>
-    <th><%= sortable "title" %></th>
-    <th><%= sortable "updated_at" %></th>
-    <th>Options</td>
+    <tr>
+      <th><%= sortable "title" %></th>
+      <th><%= sortable "updated_at" %></th>
+      <th>Options</td>
+    </tr>
   </theader>
   <tbody>
     <% @wikis.each do |wiki| %>
@@ -15,7 +17,7 @@
         </td>
         <td>
           <%= link_to "Edit", edit_wiki_path(wiki) %> | 
-          <%= link_to "Delete", wiki_path(wiki), method: :delete, data: { confirm: 'Are you sure you want to delete #{wiki.title}' },remote: true %>
+          <%= link_to "Delete", wiki_path(wiki), method: :delete, data: { confirm: "Are you sure you want to delete the Wiki: '#{wiki.title}'"},remote: true %>
         </td>
       </tr>
     <% end %>
