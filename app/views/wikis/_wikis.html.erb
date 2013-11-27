@@ -1,15 +1,23 @@
-<table>
+<table class = "table">
   <theader>
     <td>Wiki</td>
+    <td>Last Updated</td>
     <td>Options</td>
   </theader>
   <tbody>
+    <% @wikis.each do |wiki| %>
+    <tr>
     <td>
-    <%= @wikis.each do |wiki| %>
       <%= wiki.title %>   
+    </td>
+    <td>
+      <i><%= time_ago_in_words(wiki.updated_at) %> ago</i>
+    </td>
+    <td>
+      <%= link_to "Edit", edit_wiki_path %> | 
+      <%= link_to "Delete", wiki_path(wiki), method: :delete, remote: true %>
+    </td>
+    </tr>
     <% end %>
-
-        </td>
-    <td></td>
   </tbody>
 </table>

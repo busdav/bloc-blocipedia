@@ -10,8 +10,7 @@ class Wiki < ActiveRecord::Base
 
   scope :visible_to, lambda { |user| user.role == "premium" ? scoped : where(public: true) } #if user is premium, no filters, if not => filter by public == true
   scope :public, where(public: true) #make Wiki.public possible
-  scope :sort_by_title, order(:title => :desc)
-
+  
   default_scope order('created_at DESC')
 
   has_many :collaborators

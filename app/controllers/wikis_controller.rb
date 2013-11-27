@@ -1,4 +1,8 @@
 class WikisController < ApplicationController
+  respond_to :html, :js
+
+
+
   def index
     @wikis = current_user.nil? ? Wiki.public : Wiki.visible_to(current_user)
   end
@@ -48,11 +52,13 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     authorize! :destroy, @wiki, message: "You must be authorized to delete this"
     if @wiki.destroy
-      flash[:notice] = "destroyed successfully"
-      redirect_to wiki_path
+      flash[:notice] = "destroyed successfully"
     else
       flash[:error] = "unable to delete!"
-      render :show
+    end
+    
+    respond_with(@wiki) do |f|
+      f.html { redirect_to @wiki }
     end
   end
 
