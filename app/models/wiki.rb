@@ -2,9 +2,9 @@ class Wiki < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :history]
 
-  #def should_generate_new_friendly_id?
-  #  new_record?
-  #end
+  def should_generate_new_friendly_id?
+    new_record?
+  end
 
   attr_accessible :body, :title, :public
   belongs_to :user
