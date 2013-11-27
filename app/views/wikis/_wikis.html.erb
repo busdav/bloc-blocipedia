@@ -5,7 +5,10 @@
     <td>Options</td>
   </theader>
   <tbody>
+    
+<% content_tag :div, class: 'media', id: "wiki-#{wiki.id}" do %>
     <% @wikis.each do |wiki| %>
+      
     <tr>
     <td>
       <%= wiki.title %>   
@@ -14,10 +17,11 @@
       <i><%= time_ago_in_words(wiki.updated_at) %> ago</i>
     </td>
     <td>
-      <%= link_to "Edit", edit_wiki_path %> | 
+      <%= link_to "Edit", edit_wiki_path(wiki) %> | 
       <%= link_to "Delete", wiki_path(wiki), method: :delete, remote: true %>
     </td>
     </tr>
+<% end %> 
     <% end %>
   </tbody>
 </table>
