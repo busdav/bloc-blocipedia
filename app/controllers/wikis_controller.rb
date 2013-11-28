@@ -53,7 +53,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.find(params[:id])
     authorize! :destroy, @wiki, message: "You must be authorized to delete this"
     if @wiki.destroy
-#       flash[:notice] = "destroyed successfully"
+ #     flash[:notice] = "destroyed successfully"
     else
       flash[:error] = "unable to delete!"
     end
