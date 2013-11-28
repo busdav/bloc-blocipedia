@@ -1,18 +1,18 @@
-<table class="sortable">
-  <theader>
+<table class="table table-bordered sortable">
+  <thead>
     <tr>
-      <th>title</th>
-      <th>updated_at</th>
+      <th>Title</th>
+      <th>Updated At</th>
       <th>Options</td>
     </tr>
-  </theader>
+  </thead>
   <tbody>
     <% @wikis.each do |wiki| %>
       <tr id="<%= dom_id(wiki) %>">
         <td>
           <%= wiki.title %>   
         </td>
-        <td>
+        <td data-value="<%= wiki.updated_at %>">
           <i><%= time_ago_in_words(wiki.updated_at) %> ago</i>
         </td>
         <td>
