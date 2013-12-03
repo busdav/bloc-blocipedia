@@ -1,3 +1,5 @@
+$(document).ready(function() {
+
 /**
  * EpicEditor - An Embeddable JavaScript Markdown Editor (https://github.com/OscarGodson/EpicEditor)
  * Copyright (c) 2011-2012, Oscar Godson. (MIT Licensed)
@@ -2897,3 +2899,4 @@ if (typeof module !== 'undefined') {
 }).call(function() {
   return this || (typeof window !== 'undefined' ? window : global);
 }());
+});
