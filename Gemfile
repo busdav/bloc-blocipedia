@@ -9,6 +9,7 @@ gem 'redcarpet'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem "friendly_id", "~> 4.0.10"
 gem 'figaro'
+gem 'markdown_preview'
 
 
 group :development do

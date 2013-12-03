@@ -14,3 +14,6 @@
 //= require jquery_ujs
 //= require_tree .
 //= require_tree ../../../vendor/assets/javascripts/.
+
+
+var editor = new EpicEditor().load();

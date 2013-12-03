@@ -76,6 +76,8 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    markdown_preview (0.1.7)
+      rdiscount
     mime-types (1.25)
     multi_json (1.8.2)
     orm_adapter (0.4.0)
@@ -104,6 +106,7 @@ GEM
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
     rake (10.1.0)
+    rdiscount (2.1.7)
     rdoc (3.12.2)
       json (~> 1.4)
     redcarpet (3.0.0)
@@ -146,6 +149,7 @@ DEPENDENCIES
   figaro
   friendly_id (~> 4.0.10)
   jquery-rails
+  markdown_preview
   pg
   rails (= 3.2.13)
   redcarpet
