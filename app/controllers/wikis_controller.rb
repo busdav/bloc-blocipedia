@@ -2,7 +2,7 @@ class WikisController < ApplicationController
   respond_to :html, :js
 
   def index
-    @wikis = current_user.nil? ? Wiki.public : Wiki.visible_to(current_user)
+    @wikis = current_user.nil? ? Wiki.public.order(:created_at, desc) : Wiki.visible_to(current_user).order("created_at desc")
   end
 
   def new
@@ -74,6 +74,28 @@ class WikisController < ApplicationController
     params["collaborator_id"].each do |collaborator_id|
       user = User.find(collaborator_id)
       success = Collaborator.create(user: user, wiki: @wiki)
+    end
+    if success
+      flash[:notice] = "successfully saved collaborators!"
+      redirect_to @wiki
+    else
+      flash[:error] = "unable to save collaborators"
+      render :add_collaborators
+    end
+  end
+
+  def update_collaborators
+    @wiki = Wiki.find(params[:id])
+    @users = User.all
+  end
+
+  def final_update_collaborators
+    @wiki = Wiki.find(params[:id])
+    success = false
+    params["collaborator_id"].each do |collaborator_id|
+      @col = Collaborator.find(collaborator_id)
+      user = User.find(@col.user_id)
+      success = @col.update_attributes(user: user, wiki: @wiki)
     end
     if success
       flash[:notice] = "successfully updated collaborators!"

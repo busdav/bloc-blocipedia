@@ -57,6 +57,8 @@ GEM
       railties (>= 3.2.6, < 5)
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    epic-editor-rails (0.2.0)
+      railties (>= 3.2, < 5.0)
     erubis (2.7.0)
     execjs (2.0.2)
     faker (1.1.2)
@@ -142,6 +144,7 @@ DEPENDENCIES
   cancan
   coffee-rails (~> 3.2.1)
   devise
+  epic-editor-rails
   faker
   figaro
   friendly_id (~> 4.0.10)

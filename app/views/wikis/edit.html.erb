@@ -4,10 +4,10 @@
       <%= render 'form', :f => f %>
       <div class="control-group">
         <%= f.submit "Save!", class: 'btn' %></div>
+        <%= link_to "Add Collaborator", add_collaborators_wiki_path(@wiki), class: 'btn' %>
     <% end %>
   </div>
   <div class="span5">
     <h1>EDIT VIEW HERE</h1>
   </div>
 </div>
-
