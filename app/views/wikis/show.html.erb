@@ -1,13 +1,23 @@
 <h1><%= markdown @wiki.title %></h1>
   <small>
-    <p><i>Updated about <%= time_ago_in_words(@wiki.updated_at) %> ago</i></p>
+    <p><i>Updated about <%= time_ago_in_words(@wiki.updated_at) %> ago</i></p> - 
+    <% if @wiki.public? %>
+      Public
+      <% else %>
+      Private
+      <% end %>
+
   </small>
 <%= markdown @wiki.body %>
 
 <%= link_to "Edit Wiki", edit_wiki_path(@wiki) %>
 <p>
-<% if @wiki.user_id == current_user.id %>
-<%= link_to "Add Collaborator", add_collaborators_wiki_path(@wiki) %>
-<%= link_to "Update Collaborator", update_collaborators_wiki_path(@wiki) %>
-</p>
+<% if current_user %>
+  <% if @wiki.user_id == current_user.id %>
+  <%= link_to "Manage Collaborators", manage_collaborators_wiki_path(@wiki) %>
+  </p>
+  <% end %>
 <% end %>
+
+
+<%= @current_collaborators.inspect %>

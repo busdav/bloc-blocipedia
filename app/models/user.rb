@@ -23,4 +23,8 @@ class User < ActiveRecord::Base
     self.role = 'free'
   end
 
+  def collaborations
+    collaborations = Collaborator.includes_user(self)
+    collaborations.map(&:wiki)
+  end
 end

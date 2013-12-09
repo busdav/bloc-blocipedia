@@ -2,7 +2,7 @@ class WikisController < ApplicationController
   respond_to :html, :js
 
   def index
-    @wikis = current_user.nil? ? Wiki.public.order(:created_at, desc) : Wiki.visible_to(current_user).order("created_at desc")
+    @wikis = current_user.nil? ? Wiki.public.order('created_at desc') : (Wiki.public.to_a + current_user.collaborations + current_user.wikis)
   end
 
   def new
@@ -12,15 +12,15 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
-    if request.path != wiki_path(@wiki)
-      redirect_to @wiki, status: :moved_permanently
-    end
-    authorize! :read, @wiki, message: "You must be authorized in to view Wikis"
+    if request.path != wiki_path(@wiki)             #friendly_id gem
+      redirect_to @wiki, status: :moved_permanently #friendly_id gem
+    end                                             #friendly_id gem
+    authorize! :read, @wiki, message: "You must be authorized to view Wikis"
   end
 
   def edit
     @wiki = Wiki.find(params[:id])
-    authorize! :update, @wiki, message: "You must be authorized in to edit Wikis"
+    authorize! :update, @wiki, message: "You must be authorized to edit Wikis"
   end
 
   def create
@@ -63,46 +63,43 @@ class WikisController < ApplicationController
     end
   end
 
-  def add_collaborators
+  def manage_collaborators
     @wiki = Wiki.find(params[:id])
-    @users = User.all
+    @users = (current_user.blank? ? User.all : User.find(:all, :conditions => ["id != ?", current_user.id]))
   end
 
   def save_collaborators
     @wiki = Wiki.find(params[:id])
     success = false
-    params["collaborator_id"].each do |collaborator_id|
+    current_collaborators = @wiki.collaborators.map(&:id)
+    Rails.logger.info ">>>> #{current_collaborators.inspect}"
+    
+    if params["collaborator_id"].nil?
+      current_collaborators.each do |collab_id| 
+        Collaborator.destroy(collab_id)
+        success = true
+      end
+    else
+      params["collaborator_id"].each do |collaborator_id|
       user = User.find(collaborator_id)
       success = Collaborator.create(user: user, wiki: @wiki)
+      end
     end
-    if success
+    Rails.logger.info "<<<< #{current_collaborators.inspect}"
+    if success && params["collaborator_id"]
+      current_collaborators.each do |collab_id| 
+        Collaborator.destroy(collab_id)
+      end
+      Rails.logger.info "<<<< #{@wiki.collaborators.map(&:id)}"
       flash[:notice] = "successfully saved collaborators!"
       redirect_to @wiki
+    elsif success && params["collaborator_id"].nil?
+      flash[:notice] = "removed all collaborators!"
+      redirect_to @wiki
+      
     else
       flash[:error] = "unable to save collaborators"
-      render :add_collaborators
-    end
-  end
-
-  def update_collaborators
-    @wiki = Wiki.find(params[:id])
-    @users = User.all
-  end
-
-  def final_update_collaborators
-    @wiki = Wiki.find(params[:id])
-    success = false
-    params["collaborator_id"].each do |collaborator_id|
-      @col = Collaborator.find(collaborator_id)
-      user = User.find(@col.user_id)
-      success = @col.update_attributes(user: user, wiki: @wiki)
-    end
-    if success
-      flash[:notice] = "successfully updated collaborators!"
       redirect_to @wiki
-    else
-      flash[:error] = "unable to update collaborators"
-      render :add_collaborators
     end
   end
 end

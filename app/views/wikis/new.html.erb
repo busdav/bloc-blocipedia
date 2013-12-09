@@ -1,14 +1,13 @@
+<!--<%= content_for :head do %>
+  <test>Hi!</test>
+  <%= stylesheet_link_tag 'wikis' %>
+<% end %>-->
+
 <h2>New Wiki!</h2>
 
 <%= form_for @wiki do |f| %>
  <%= render 'form', :f => f %>
-<div class="control-group">
-    <%= f.label :public %>
-    <div class="controls">
-      <%= f.check_box :public %>Public Wiki (You must be a premium member to create a private wiki)
-    </div>
-  </div>
 
   <div class="control-group">
-    <%= f.submit "Create Wiki!", class: 'btn' %></div>
+    <%= f.submit "Create Wiki!", class: 'btn', :id => "submitBtn" %></div>
 <% end %>

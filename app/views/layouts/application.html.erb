@@ -3,6 +3,10 @@
 <head>
   <title>Blocipedia</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
+<!-- modify css for edit view
+  <%- if content_for?(:head) -%>
+    <%= yield :head %>
+  <% end %> -->
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>

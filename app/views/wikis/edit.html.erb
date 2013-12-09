@@ -1,10 +1,15 @@
+<!-- <%= content_for :head do %>
+  <test>Hi!</test>
+  <%= stylesheet_link_tag 'wikis' %>
+<% end %> -->
+
 <div class="container">
   <div class="span5">
     <%= form_for @wiki do |f| %>
       <%= render 'form', :f => f %>
       <div class="control-group">
-        <%= f.submit "Save!", class: 'btn' %></div>
-        <%= link_to "Add Collaborator", add_collaborators_wiki_path(@wiki), class: 'btn' %>
+        <%= f.submit "Save!", class: 'btn', :id => "submitBtn" %></div>
+        <%= link_to "Manage Collaborator", manage_collaborators_wiki_path(@wiki), class: 'btn' %>
     <% end %>
   </div>
   <div class="span5">
